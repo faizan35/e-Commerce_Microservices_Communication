@@ -57,9 +57,9 @@ bash ./scripts/build-docekr-img.sh
 ### Push each image to DockerHub
 
 ```bash
-docker push faizan44/eCom-backend:latest
-docker push faizan44/eCom-database:latest
-docker push faizan44/eCom-frontend:latest
+docker push faizan44/e_com-backend:latest
+docker push faizan44/e_com-database:latest
+docker push faizan44/e_com-frontend:latest
 ```
 
 ## k8s - Apply
