@@ -8,12 +8,31 @@
   <body>
     <h1>Welcome to E-commerce</h1>
     <button onclick="fetchData()">Get Products</button>
-    <script>
-      async function fetchData() {
-        const response = await fetch("http://backend:3000/api/products");
-        const data = await response.json();
-        console.log(data);
-      }
-    </script>
+
+    <h2>Product List</h2>
+    <div id="productList"></div>
+
+    <h2>Add Product</h2>
+    <input type="text" id="newProductName" placeholder="Product name" />
+    <button onclick="addProduct()">Add Product</button>
+
+    <h2>Update Product</h2>
+    <input
+      type="text"
+      id="updateProductId"
+      placeholder="Product ID to update"
+    />
+    <input type="text" id="updateProductName" placeholder="New product name" />
+    <button onclick="updateProduct()">Update Product</button>
+
+    <h2>Delete Product</h2>
+    <input
+      type="text"
+      id="deleteProductId"
+      placeholder="Product ID to delete"
+    />
+    <button onclick="deleteProduct()">Delete Product</button>
+
+    <script src="./script.js"></script>
   </body>
 </html>
