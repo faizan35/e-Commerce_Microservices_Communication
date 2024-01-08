@@ -1,53 +1,91 @@
-// microservices-ecommerce/backend/backend.js
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const PORT = 3000;
 
-app.use(express.json());
+const mongoose = require("mongoose");
+const Product = require("../database/database");
 
-// Sample product data
-const products = [
-  { id: 1, name: "Product 1" },
-  { id: 2, name: "Product 2" },
-  { id: 3, name: "Product 3" },
-];
+app.use(express.json());
+app.use(cors());
+
+// Function to check if products exist in the database
+const checkAndInsertDemoData = async () => {
+  try {
+    const productsCount = await Product.countDocuments();
+    if (productsCount === 0) {
+      // Insert demo data if no products exist
+      const demoProducts = [
+        { name: "Product 1" },
+        { name: "Product 2" },
+        { name: "Product 3" },
+      ];
+
+      await Product.insertMany(demoProducts);
+      console.log("Demo data inserted successfully.");
+    }
+  } catch (error) {
+    console.error("Error checking or inserting demo data:", error.message);
+  }
+};
 
 // CRUD operations
-app.get("/api/products", (req, res) => {
-  res.json(products);
+app.get("/api/products", async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
-app.post("/api/products", (req, res) => {
-  const newProduct = req.body;
-  products.push(newProduct);
-  res.status(201).json(newProduct);
-});
-
-app.put("/api/products/:id", (req, res) => {
-  const productId = parseInt(req.params.id);
-  const updatedProduct = req.body;
-
-  products.forEach((product, index) => {
-    if (product.id === productId) {
-      products[index] = updatedProduct;
-    }
+app.post("/api/products", async (req, res) => {
+  const newProduct = new Product({
+    name: req.body.name,
   });
 
-  res.json(updatedProduct);
+  try {
+    const savedProduct = await newProduct.save();
+    res.status(201).json(savedProduct);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 });
 
-app.delete("/api/products/:id", (req, res) => {
-  const productId = parseInt(req.params.id);
+app.put("/api/products/:id", async (req, res) => {
+  const productId = req.params.id;
 
-  const index = products.findIndex((product) => product.id === productId);
-  if (index !== -1) {
-    const deletedProduct = products.splice(index, 1);
-    res.json(deletedProduct[0]);
-  } else {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      productId,
+      { name: req.body.name },
+      { new: true }
+    );
+
+    res.json(updatedProduct);
+  } catch (error) {
     res.status(404).json({ message: "Product not found" });
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Backend service is running on http://localhost:${PORT}`);
+app.delete("/api/products/:id", async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    const deletedProduct = await Product.findByIdAndDelete(productId);
+    res.json(deletedProduct);
+  } catch (error) {
+    res.status(404).json({ message: "Product not found" });
+  }
 });
+
+mongoose
+  .connect("mongodb://127.0.0.1:27017/e-commerce")
+  .then(async () => {
+    console.log("Connected to the database");
+    await checkAndInsertDemoData(); // Check and insert demo data
+    app.listen(PORT, () => {
+      console.log(`Backend service is running on http://localhost:${PORT}`);
+    });
+  })
+  .catch((error) => console.error("Error connecting to the database:", error));
