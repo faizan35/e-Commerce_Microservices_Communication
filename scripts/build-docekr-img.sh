@@ -5,10 +5,9 @@
 # TAG=latest
 # $TAG
 
-# backend
-cd backend/
-sudo docker build -t faizan44/e_com-backend:latest . || { echo "Error building product-service"; exit 1; }
-cd ..
+# backend + database
+sudo docker build -t faizan44/e_com-backend:latest -f Dockerfile-backend . || { echo "Error building product-service"; exit 1; }
+
 
 # database
 cd database/
