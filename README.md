@@ -6,7 +6,7 @@ Welcome to the Microservices E-commerce project!
 
 This project is designed as an example of an e-commerce application using microservices architecture. It consists of separate components for the backend, frontend, and a MongoDB database for storing product information.
 
-<img src="./img/frontpage-yellow.png">
+<img src="./img/frontpage.png">
 
 ## Getting Started
 
