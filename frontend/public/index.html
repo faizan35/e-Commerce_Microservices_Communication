@@ -4,34 +4,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Microservices E-commerce</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Welcome to E-commerce</h1>
-    <button onclick="fetchData()">Get Products</button>
+    <header>
+      <h1>Microservices E-commerce</h1>
+    </header>
 
-    <h2>Product List</h2>
-    <div id="productList"></div>
+    <main>
+      <section id="productActions">
+        <div class="action">
+          <h2>Product Actions</h2>
+          <button onclick="fetchData()">Get Products</button>
+        </div>
 
-    <h2>Add Product</h2>
-    <input type="text" id="newProductName" placeholder="Product name" />
-    <button onclick="addProduct()">Add Product</button>
+        <div class="action">
+          <h3>Add New Products</h3>
+          <input type="text" id="newProductName" placeholder="Product name" />
+          <button onclick="addProduct()">Add Product</button>
+        </div>
 
-    <h2>Update Product</h2>
-    <input
-      type="text"
-      id="updateProductId"
-      placeholder="Product ID to update"
-    />
-    <input type="text" id="updateProductName" placeholder="New product name" />
-    <button onclick="updateProduct()">Update Product</button>
+        <div class="action">
+          <h3>Update Products</h3>
+          <input
+            type="text"
+            id="updateProductId"
+            placeholder="Product ID to update"
+          />
+          <input
+            type="text"
+            id="updateProductName"
+            placeholder="New product name"
+          />
+          <button onclick="updateProduct()">Update Product</button>
+        </div>
 
-    <h2>Delete Product</h2>
-    <input
-      type="text"
-      id="deleteProductId"
-      placeholder="Product ID to delete"
-    />
-    <button onclick="deleteProduct()">Delete Product</button>
+        <div class="action">
+          <h3>Delete Products</h3>
+          <input
+            type="text"
+            id="deleteProductId"
+            placeholder="Product ID to delete"
+          />
+          <button onclick="deleteProduct()">Delete Product</button>
+        </div>
+      </section>
+
+      <section id="productList">
+        <h2>Product List</h2>
+        <div id="productItems"></div>
+      </section>
+    </main>
 
     <script src="./script.js"></script>
   </body>
