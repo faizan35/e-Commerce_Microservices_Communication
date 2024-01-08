@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const PORT = 3000;
+const HOST = "0.0.0.0";
 
 const mongoose = require("mongoose");
 const Product = require("../database/database");
@@ -84,8 +85,10 @@ mongoose
   .then(async () => {
     console.log("Connected to the database");
     await checkAndInsertDemoData(); // Check and insert demo data
-    app.listen(PORT, () => {
-      console.log(`Backend service is running on http://localhost:${PORT}`);
+    app.listen(PORT, HOST, () => {
+      console.log(
+        `Backend service is running on http://localhost:${PORT} and HOST=${HOST}`
+      );
     });
   })
   .catch((error) => console.error("Error connecting to the database:", error));
