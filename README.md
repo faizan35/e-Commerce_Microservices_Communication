@@ -51,7 +51,7 @@ cd microservices-Communication-Project
 ```
 
 ```bash
-bash ./build-docekr-img.sh
+bash ./scripts/build-docekr-img.sh
 ```
 
 ### Push each image to DockerHub
