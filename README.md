@@ -1,34 +1,73 @@
 # Microservices E-commerce
 
-Welcome to the Microservices E-commerce project!
+## < --- In Progress --->
 
-## Introduction
-
-This project is designed as an example of an e-commerce application using microservices architecture. It consists of separate components for the backend, frontend, and a MongoDB database for storing product information.
+This project is designed as an example of an e-commerce application using **microservices architecture**. It consists of separate components for the backend, frontend, and a MongoDB database for storing product information.
 
 <img src="./img/frontpage.png">
 
-## Getting Started
+## Getting Started for Develpment
 
 To run the project locally, follow these steps:
 
-1. **Install Dependencies:**
-   ```bash
-   npm install
-   ```
-2. **Start the Backend:**
+##### 1. Clone Repo
 
-   ```bash
-   node backend/backend.js
-   ```
+```bash
+git clone https://github.com/faizan35/e-Commerce_Microservices_Communication.git
+```
 
-3. **Start the Frontend:**
+```bash
+cd e-Commerce_Microservices_Communication/
+```
 
-   ```bash
-   node frontend/server.js
-   ```
+##### 2. cd and install
 
-4. Access the frontend in your browser at http://localhost:8080.
+```bash
+bash ./scripts/npm_install.sh
+```
+
+##### 3. Start ALL microservices (frontend, backend and database)
+
+Open two teminals, execute both command in both of them.
+
+```bash
+node backend/backend.js
+```
+
+```bash
+node frontend/server.js
+```
+
+Start your MongoDB Connection on `mongodb://localhost:27017`.
+
+##### 4. Access the frontend in your browser at http://localhost:8080.
+
+## Docker
+
+### Build Docker Images
+
+```bash
+cd microservices-Communication-Project
+```
+
+```bash
+bash ./build-docekr-img.sh
+```
+
+### Push each image to DockerHub
+
+```bash
+docker push faizan44/payment-service:latest
+docker push faizan44/order-service:latest
+docker push faizan44/user-service:latest
+docker push faizan44/product-service:latest
+```
+
+## k8s - Apply
+
+```bash
+bash ./apply-deployment-and-service-files.sh
+```
 
 ## API Endpoints
 
@@ -39,7 +78,7 @@ To run the project locally, follow these steps:
 
 ## Frontend Usage
 
-- Click the "Get Products" button to fetch and display the list of products.
+- Click the "**Get Products**" button to fetch and display the list of products.
 - Add, update, or delete products using the respective sections on the webpage.
 
 ## Database
