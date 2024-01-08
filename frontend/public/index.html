@@ -1,4 +1,3 @@
-<!-- microservices-ecommerce/frontend/index.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,7 +10,7 @@
     <button onclick="fetchData()">Get Products</button>
     <script>
       async function fetchData() {
-        const response = await fetch("http://localhost:3000/api/products");
+        const response = await fetch("http://backend:3000/api/products");
         const data = await response.json();
         console.log(data);
       }
