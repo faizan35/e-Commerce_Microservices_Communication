@@ -8,7 +8,7 @@ This project is designed as an example of an e-commerce application using **micr
 
 ## Getting Started for Develpment
 
-To run the project locally, follow these steps:
+**To run the project locally, follow these steps:**
 
 ##### 1. Clone Repo
 
