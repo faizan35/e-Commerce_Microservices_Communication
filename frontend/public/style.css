@@ -25,6 +25,11 @@ h3 {
   color: #333;
 }
 
+h1 {
+  font-size: 3em;
+  color: #ffdb58;
+}
+
 .action {
   margin-bottom: 15px;
   display: flex;
