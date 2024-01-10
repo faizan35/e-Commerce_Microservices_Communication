@@ -54,6 +54,16 @@ cd microservices-Communication-Project
 bash ./scripts/build-docekr-img.sh
 ```
 
+### Verify by running
+
+sudo docker run -d --name mongodb-container -p 27017:27017 mongodb-service
+
+sudo docker run -d -p 27017:27017 faizan44/e_com-database:latest
+
+sudo docker run -d -p 3000:3000 faizan44/e_com-backend:latest
+
+sudo docker run -d -p 8080:8080 faizan44/e_com-frontend
+
 ### Push each image to DockerHub
 
 ```bash
