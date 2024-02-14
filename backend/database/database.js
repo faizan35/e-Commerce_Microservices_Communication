@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://database:27017/e-commerce");
+mongoose.connect("mongodb://127.0.0.1:27017/e-commerce");
 
 const productSchema = new mongoose.Schema({
   name: String,
