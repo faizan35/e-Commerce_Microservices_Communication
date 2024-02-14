@@ -1,0 +1,17 @@
+FROM node:18
+
+# Set the working directory to /app
+WORKDIR /app/backend
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies for backend
+RUN npm install
+
+# copy all
+COPY . .
+
+EXPOSE 3000
+
+CMD ["node", "backend.js"]

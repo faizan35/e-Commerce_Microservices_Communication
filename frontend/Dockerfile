@@ -1,18 +1,11 @@
-FROM node:18
-# FROM node:18-alpine
+# Use a lightweight Nginx image to serve static content
+FROM nginx:alpine
 
-# workdir /app
-WORKDIR /app
+# Copy static files into Nginx's html directory
+COPY ./public /usr/share/nginx/html
 
-# Copy package.json and package-lock.json to /app
-COPY package*.json ./
+# Expose port 80
+EXPOSE 80
 
-# install 
-RUN npm install
-
-# copy all
-COPY . .
-
-EXPOSE 8080
-
-CMD ["node", "server.js"]
+# Default command to start Nginx
+CMD ["nginx", "-g", "daemon off;"]
