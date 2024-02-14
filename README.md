@@ -1,7 +1,5 @@
 # Microservices E-commerce
 
-## < --- In Progress --->
-
 This project is designed as an example of an e-commerce application using **microservices architecture**. It consists of separate components for the backend, frontend, and a MongoDB database for storing product information.
 
 <img src="./img/frontpage.png">
@@ -28,54 +26,59 @@ bash ./scripts/npm_install.sh
 
 ##### 3. Start ALL microservices (frontend, backend and database)
 
-Open two teminals, execute both command in both of them.
+Open teminals, execute both command in both of them.
 
-```bash
-node backend/backend.js
-```
+1. Run MongoDB Server.
+2. Execute frontend first.
 
-```bash
-node frontend/server.js
-```
+   ```bash
+   node frontend/server.js
+   ```
 
-Start your MongoDB Connection on `mongodb://localhost:27017`.
+3. Execute backend then.
+
+   ```bash
+   node backend/backend.js
+   ```
 
 ##### 4. Access the frontend in your browser at http://localhost:8080.
 
 ## Docker
 
-### Build Docker Images
+### Run with Docker-Compose
 
 ```bash
-cd microservices-Communication-Project
+docker-compose up -d
 ```
 
+### Pull from DockerHUB and Run
+
+1. Pull both images.
+
+   ```bash
+   docker pull faizan44/e-com_micro_frontend
+   docker pull faizan44/e-com_micro_backend
+   ```
+
+2. Create `docker-compose.yml` file
+
+- Just replace this,
+  ```yaml
+  build:
+  context: ./frontend
+  ```
+- With
+
+  ```yaml
+  image: faizan44/e-com_micro_frontend
+  ```
+
+- Do same for **backend**, and run.
+
+3. Run this command where your `docker-compose.yml` file is located.
+
 ```bash
-bash ./scripts/build-docekr-img.sh
-```
-
-### Verify by running
-
-sudo docker run -d --name mongodb-container -p 27017:27017 mongodb-service
-
-sudo docker run -d -p 27017:27017 faizan44/e_com-database:latest
-
-sudo docker run -d -p 3000:3000 faizan44/e_com-backend:latest
-
-sudo docker run -d -p 8080:8080 faizan44/e_com-frontend
-
-### Push each image to DockerHub
-
-```bash
-docker push faizan44/e_com-backend:latest
-docker push faizan44/e_com-database:latest
-docker push faizan44/e_com-frontend:latest
-```
-
-## k8s - Apply
-
-```bash
-bash ./apply-deployment-and-service-files.sh
+docker-compose up -d
 ```
 
 ## API Endpoints
