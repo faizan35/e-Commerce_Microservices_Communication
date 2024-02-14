@@ -4,7 +4,7 @@ FROM node:18-bullseye
 
 
 # Set the working directory to /app
-WORKDIR /app/backend
+WORKDIR /app
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
