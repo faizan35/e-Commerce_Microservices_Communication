@@ -82,8 +82,10 @@ app.delete("/api/products/:id", async (req, res) => {
 
 // old uri = mongodb://127.0.0.1:27017/e-commerce
 
+// docker-compose = mongodb://database:27017/e-commerce
+
 mongoose
-  .connect("mongodb://database:27017/e-commerce")
+  .connect("mongodb://127.0.0.1:27017/e-commerce")
   .then(async () => {
     console.log("Connected to the database");
     await checkAndInsertDemoData(); // Check and insert demo data
