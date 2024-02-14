@@ -1,4 +1,7 @@
-FROM node:18
+# FROM node:18
+
+FROM node:18-alpine3.19-slim
+
 
 # Set the working directory to /app
 WORKDIR /app/backend
