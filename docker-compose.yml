@@ -15,7 +15,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - MONGODB_URI=mongodb://127.0.0.1:27017/e-commerce
+      - MONGODB_URI=mongodb://database:27017/e-commerce
     depends_on:
       - database
 
