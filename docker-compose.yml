@@ -20,6 +20,6 @@ services:
       - database
 
   database:
-    image: mongo
+    image: karimtemple/mongo
     ports:
       - "27017:27017"
