@@ -5,7 +5,7 @@ const PORT = 3000;
 const HOST = "0.0.0.0";
 
 const mongoose = require("mongoose");
-const Product = require("../database/database");
+const Product = require("./database/database");
 
 app.use(express.json());
 app.use(cors());
