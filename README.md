@@ -1,5 +1,7 @@
 # Microservices E-commerce
 
+> This is OLD with three tier app, No microservices.
+
 This project is designed as an example of an e-commerce application using **microservices architecture**. It consists of separate components for the backend, frontend, and a MongoDB database for storing product information.
 
 <img src="./img/frontpage.png">
