@@ -6,6 +6,8 @@ services:
       context: ./frontend
     ports:
       - "8080:80"
+    environment:
+      - PORT=8080
     depends_on:
       - backend
 
@@ -16,6 +18,8 @@ services:
       - "3000:3000"
     environment:
       - MONGODB_URI=mongodb://127.0.0.1:27017/e-commerce
+      - PORT=3000
+      - HOST=0.0.0.0
     depends_on:
       - database
 
