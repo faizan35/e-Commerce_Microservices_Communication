@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: <frontend_image>:<tag>
+          image: faizan44/e-com_micro_frontend
           ports:
             - containerPort: 8080
           resources:
