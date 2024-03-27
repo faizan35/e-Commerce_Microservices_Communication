@@ -117,6 +117,10 @@ docker-compose up -d
 docker-compose up -d
 ```
 
+## K8s
+
+- namespace: `kubectl create namespace e-com`
+
 ## API Endpoints
 
 - **GET /api/products** Retrieve the list of products.
