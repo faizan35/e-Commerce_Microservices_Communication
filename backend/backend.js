@@ -1,14 +1,19 @@
 const express = require("express");
 const cors = require("cors");
-const app = express();
-const PORT = 3000;
-const HOST = "0.0.0.0";
-
 const mongoose = require("mongoose");
-const Product = require("./database/database");
+const dotenv = require("dotenv");
+const Product = require("./database");
+
+const app = express();
+// const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT;
+const HOST = process.env.HOST || "0.0.0.0";
 
 app.use(express.json());
 app.use(cors());
+
+// Load environment variables
+dotenv.config();
 
 // Function to check if products exist in the database
 const checkAndInsertDemoData = async () => {
@@ -80,12 +85,8 @@ app.delete("/api/products/:id", async (req, res) => {
   }
 });
 
-// old uri = mongodb://127.0.0.1:27017/e-commerce
-
-// docker-compose = mongodb://database:27017/e-commerce
-
 mongoose
-  .connect("mongodb://127.0.0.1:27017/e-commerce")
+  .connect(process.env.MONGODB_URI) // Use MongoDB URI from environment variables
   .then(async () => {
     console.log("Connected to the database");
     await checkAndInsertDemoData(); // Check and insert demo data

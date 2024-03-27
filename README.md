@@ -24,7 +24,22 @@ cd e-Commerce_Microservices_Communication/
 bash ./scripts/npm_install.sh
 ```
 
-##### 3. Start ALL microservices (frontend, backend and database)
+##### 3. Create `.env` files
+
+- Inside `/backend` dir.
+
+  ```env
+  MONGODB_URI=mongodb://127.0.0.1:27017/e-commerce
+  PORT=3000
+  HOST=0.0.0.0
+  ```
+
+- Inside `/frontend` dir.
+  ```env
+  PORT=8080
+  ```
+
+##### 4. Start (frontend, backend and database)
 
 Open teminals, execute both command in both of them.
 
@@ -41,7 +56,7 @@ Open teminals, execute both command in both of them.
    node backend/backend.js
    ```
 
-##### 4. Access the frontend in your browser at http://localhost:8080.
+##### 5. Access the frontend in your browser at http://localhost:8080.
 
 ## Docker
 
