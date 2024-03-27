@@ -60,6 +60,27 @@ Open teminals, execute both command in both of them.
 
 ## Docker
 
+### Build Docker Images
+
+1. Frontend
+
+```bash
+cd frontend/
+docker build -t faizan44/e-com_micro_frontend:latest .
+```
+
+2. Backend
+
+```bash
+cd backend/
+docker build -t faizan44/e-com_micro_backend:latest .
+```
+
+### Push to DockerHub
+
+- `docker push faizan44/e-com_micro_frontend`
+- `docker push faizan44/e-com_micro_backend`
+
 ### Run with Docker-Compose
 
 ```bash
