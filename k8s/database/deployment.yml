@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: database
   namespace: e-com
   labels:
-    role: frontend
+    role: database
 spec:
   replicas: 1
   selector:
     matchLabels:
-      role: frontend
+      role: database
   template:
     metadata:
       labels:
-        role: frontend
+        role: database
     spec:
       containers:
-        - name: frontend-e-com
-          image: faizan44/e-com_micro_frontend
+        - name: database-e-com
+          image: mongo
           ports:
-            - containerPort: 8080
+            - containerPort: 27017
           resources:
             requests:
               memory: "64Mi"
@@ -27,6 +27,3 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
-          env:
-            - name: PORT
-              value: "8080"
