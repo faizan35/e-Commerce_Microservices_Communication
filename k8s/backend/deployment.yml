@@ -1,25 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: backend-deployment
   namespace: e-com
   labels:
-    role: backend
+    app: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      role: backend
+      app: backend
   template:
     metadata:
       labels:
-        role: backend
+        app: backend
     spec:
       containers:
-        - name: backend-e-com
+        - name: backend
           image: faizan44/e-com_micro_backend
           ports:
             - containerPort: 3000
+          env:
+            - name: MONGODB_URI
+              value: "mongodb://mongodb-service:27017/e-commerce"
+            - name: PORT
+              value: "3000"
+            - name: HOST
+              value: "0.0.0.0"
           resources:
             requests:
               memory: "64Mi"
@@ -27,10 +34,3 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
-          env:
-            - name: MONGODB_URI
-              value: "mongodb://db-svc:27017/e-commerce"
-            - name: PORT
-              value: "3000"
-            - name: HOST
-              value: "0.0.0.0"
