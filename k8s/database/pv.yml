@@ -10,6 +10,3 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: manual
-  resources:
-    requests:
-      storage: 1Gi
