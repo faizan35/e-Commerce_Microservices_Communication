@@ -1,9 +1,9 @@
+const BACKEND = process.env.BACKEND;
+
 async function fetchData() {
   console.log("Fetching data...");
   try {
-    const response = await fetch(
-      `http://${process.env.BACKEND}:3000/api/products`
-    );
+    const response = await fetch(`http://${BACKEND}:3000/api/products`);
     const data = await response.json();
 
     if (!response.ok) {
