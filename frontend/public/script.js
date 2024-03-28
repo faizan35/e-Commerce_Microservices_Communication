@@ -1,4 +1,5 @@
 // const BACKEND = process.env.BACKEND;
+import { BACKEND } from "../server";
 
 async function fetchData() {
   console.log("Fetching data...");
