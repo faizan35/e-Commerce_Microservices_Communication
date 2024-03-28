@@ -1,12 +1,7 @@
-// const dotenv = require("dotenv");
-// dotenv.config();
-
-const HOST = "backend";
-
 async function fetchData() {
   console.log("Fetching data...");
   try {
-    const response = await fetch(`http://${HOST}:3000/api/products`);
+    const response = await fetch("http://localhost:3000/api/products");
     const data = await response.json();
 
     if (!response.ok) {
