@@ -5,15 +5,15 @@ const dotenv = require("dotenv");
 const Product = require("./database");
 
 const app = express();
+// Load environment variables
+dotenv.config();
+
 // const PORT = process.env.PORT || 8000;
 const PORT = process.env.PORT;
 const HOST = process.env.HOST || "0.0.0.0";
 
 app.use(express.json());
 app.use(cors());
-
-// Load environment variables
-dotenv.config();
 
 // Function to check if products exist in the database
 const checkAndInsertDemoData = async () => {
