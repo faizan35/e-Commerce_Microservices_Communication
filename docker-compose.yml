@@ -8,6 +8,7 @@ services:
       - "8080:8080"
     environment:
       - PORT=8080
+      - BACKEND=192.168.0.11
     depends_on:
       - backend
 
