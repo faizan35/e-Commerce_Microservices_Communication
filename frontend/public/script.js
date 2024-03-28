@@ -1,7 +1,7 @@
 async function fetchData() {
   console.log("Fetching data...");
   try {
-    const response = await fetch("http://localhost:3000/api/products");
+    const response = await fetch("http://backend:3000/api/products");
     const data = await response.json();
 
     if (!response.ok) {
