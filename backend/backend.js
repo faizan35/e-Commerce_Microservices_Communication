@@ -29,7 +29,7 @@ const checkAndInsertDemoData = async () => {
 
       await Product.insertMany(demoProducts);
       console.log("Demo data inserted successfully.");
-    } else if (productsCount > 3) {
+    } else if (productsCount >= 3) {
       console.log("Already inserted Demo data...");
     }
   } catch (error) {
