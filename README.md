@@ -83,8 +83,22 @@ docker build -t faizan44/e-com_micro_backend:latest .
 
 ### Run with Docker-Compose
 
+1. Install Docker-Compose
+
+```bash
+sudo apt  install docker-compose
+```
+
+2. Run
+
 ```bash
 docker-compose up -d
+```
+
+3. down
+
+```bash
+docker-compose down
 ```
 
 ### Pull from DockerHUB and Run
