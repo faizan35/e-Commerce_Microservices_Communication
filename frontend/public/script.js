@@ -1,7 +1,7 @@
 // const dotenv = require("dotenv");
 // dotenv.config();
 
-const HOST = "0.0.0.0";
+const HOST = "backend";
 
 async function fetchData() {
   console.log("Fetching data...");
