@@ -6,7 +6,6 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-export const BACKEND = process.env.BACKEND;
 
 app.use(express.static(path.join(__dirname, "public")));
 

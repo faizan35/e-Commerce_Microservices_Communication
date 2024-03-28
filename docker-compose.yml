@@ -8,9 +8,10 @@ services:
       - "8080:8080"
     environment:
       - PORT=8080
-      - BACKEND=192.168.0.11
     depends_on:
       - backend
+    networks:
+      - my-network
 
   backend:
     build:
@@ -23,6 +24,8 @@ services:
       - HOST=0.0.0.0
     depends_on:
       - database
+    networks:
+      - my-network
 
   database:
     image: mongo
@@ -30,6 +33,12 @@ services:
       - "27017:27017"
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
 
 volumes:
   mongodb_data:
