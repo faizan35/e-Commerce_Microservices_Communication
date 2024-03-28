@@ -29,6 +29,8 @@ const checkAndInsertDemoData = async () => {
 
       await Product.insertMany(demoProducts);
       console.log("Demo data inserted successfully.");
+    } else if (productsCount > 3) {
+      console.log("Already inserted Demo data...");
     }
   } catch (error) {
     console.error("Error checking or inserting demo data:", error.message);
