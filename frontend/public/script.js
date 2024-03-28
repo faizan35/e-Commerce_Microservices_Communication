@@ -1,4 +1,4 @@
-const BACKEND = process.env.BACKEND;
+// const BACKEND = process.env.BACKEND;
 
 async function fetchData() {
   console.log("Fetching data...");
