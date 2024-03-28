@@ -1,12 +1,12 @@
-const dotenv = require("dotenv");
-dotenv.config();
+// const dotenv = require("dotenv");
+// dotenv.config();
 
-const HOST = process.env.HOST || "0.0.0.0";
+const HOST = "0.0.0.0";
 
 async function fetchData() {
   console.log("Fetching data...");
   try {
-    const response = await fetch("http://${HOST}:3000/api/products");
+    const response = await fetch(`http://${HOST}:3000/api/products`);
     const data = await response.json();
 
     if (!response.ok) {
@@ -53,7 +53,7 @@ async function addProduct() {
   const newProductName = document.getElementById("newProductName").value;
 
   try {
-    const response = await fetch("http://${HOST}:3000/api/products", {
+    const response = await fetch("http://localhost:3000/api/products", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +80,7 @@ async function updateProduct() {
 
   try {
     const response = await fetch(
-      `http://${HOST}:3000/api/products/${updateProductId}`,
+      `http://localhost:3000/api/products/${updateProductId}`,
       {
         method: "PUT",
         headers: {
@@ -108,7 +108,7 @@ async function deleteProduct() {
 
   try {
     const response = await fetch(
-      `http://${HOST}:3000/api/products/${deleteProductId}`,
+      `http://localhost:3000/api/products/${deleteProductId}`,
       {
         method: "DELETE",
       }
