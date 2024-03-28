@@ -1,15 +1,12 @@
 version: "3.8"
 
 services:
-  frontend:
-    build:
-      context: ./frontend
+  database:
+    image: mongo:4.4.6
     ports:
-      - "8080:8080"
-    environment:
-      - PORT=8080
-    depends_on:
-      - backend
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
     networks:
       - my-network
 
@@ -27,12 +24,15 @@ services:
     networks:
       - my-network
 
-  database:
-    image: mongo
+  frontend:
+    build:
+      context: ./frontend
     ports:
-      - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
+      - "8080:8080"
+    environment:
+      - PORT=8080
+    depends_on:
+      - backend
     networks:
       - my-network
 
