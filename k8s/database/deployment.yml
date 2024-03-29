@@ -1,10 +1,9 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: mongo
   namespace: e-com
 spec:
-  serviceName: "mongodb-service"
   replicas: 1
   selector:
     matchLabels:
@@ -27,21 +26,33 @@ spec:
             - "0.0.0.0"
           ports:
             - containerPort: 27017
-          resources:
-            requests:
-              memory: "128Mi"
-              cpu: "500m"
-            limits:
-              memory: "256Mi"
-              cpu: "1000m"
 
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: mongo-user
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: mongo-pass
           # resources:
           #   requests:
-          #     memory: "64Mi"
-          #     cpu: "250m"
-          #   limits:
           #     memory: "128Mi"
           #     cpu: "500m"
+          #   limits:
+          #     memory: "256Mi"
+          #     cpu: "1000m"
+
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
           volumeMounts:
             - name: mongo-data
               mountPath: /data/db
