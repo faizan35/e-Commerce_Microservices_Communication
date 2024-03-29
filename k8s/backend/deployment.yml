@@ -22,11 +22,19 @@ spec:
             - containerPort: 3000
           env:
             - name: MONGODB_URI
-              value: "mongodb://mongodb-service.e-com:27017/e-commerce"
+              value: "mongodb://mongodb-service:27017/e-commerce"
             - name: PORT
               value: "3000"
             - name: HOST
               value: "0.0.0.0"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
+            limits:
+              memory: "256Mi"
+              cpu: "1000m"
+
           # resources:
           #   requests:
           #     memory: "64Mi"
