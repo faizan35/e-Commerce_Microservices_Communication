@@ -12,3 +12,6 @@ spec:
   storageClassName: manual
   hostPath:
     path: /data/db
+  claimRef:
+    namespace: e-com
+    name: mongo-pvc
