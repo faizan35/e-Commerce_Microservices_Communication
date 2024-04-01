@@ -56,12 +56,16 @@ spec:
           volumeMounts:
             - name: mongo-data
               mountPath: /data/db
-  volumeClaimTemplates:
-    - metadata:
-        name: mongo-data
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        storageClassName: manual
-        resources:
-          requests:
-            storage: 250Mi
+      volumes: 
+      - name: mongo-volume
+        persistentVolumeClaim:
+          claimName: mongo-pvc
+  # volumeClaimTemplates:
+  #   - metadata:
+  #       name: mongo-data
+  #     spec:
+  #       accessModes: ["ReadWriteOnce"]
+  #       storageClassName: manual
+  #       resources:
+  #         requests:
+  #           storage: 250Mi
