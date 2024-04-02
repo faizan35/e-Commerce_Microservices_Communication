@@ -5,8 +5,9 @@ metadata:
   namespace: e-com
 spec:
   selector:
-    app: mongodb-service
+    app: mongo
   ports:
-    - protocol: TCP
+    - name: mongodb-service
+      protocol: TCP
       port: 27017
       targetPort: 27017

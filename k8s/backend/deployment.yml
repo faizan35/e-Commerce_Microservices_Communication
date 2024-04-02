@@ -27,24 +27,16 @@ spec:
               value: "3000"
             - name: HOST
               value: "0.0.0.0"
-            # - name: MONGO_INITDB_ROOT_USERNAME
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: mongo-secret
-            #       key: mongo-user
-            # - name: MONGO_INITDB_ROOT_PASSWORD
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: mongo-secret
-            #       key: mongo-pass
-          # resources:
-          #   requests:
-          #     memory: "128Mi"
-          #     cpu: "500m"
-          #   limits:
-          #     memory: "256Mi"
-          #     cpu: "1000m"
-
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongo-user
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongo-pass
           resources:
             requests:
               memory: "64Mi"
