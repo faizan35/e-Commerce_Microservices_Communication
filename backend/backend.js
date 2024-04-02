@@ -2,7 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const Product = require("./database");
+
+const { Product, connectionParams  } = require("./database");
+
+// console.log("from backend conn str ", connectionString);
 
 const app = express();
 // Load environment variables
@@ -88,13 +91,13 @@ app.delete("/api/products/:id", async (req, res) => {
 });
 
 mongoose
-  .connect(process.env.MONGODB_URI) // Use MongoDB URI from environment variables
+  .connect(process.env.MONGODB_URI, connectionParams) // Use MongoDB URI from environment variables
   .then(async () => {
     console.log("Connected to the database");
     await checkAndInsertDemoData(); // Check and insert demo data
     app.listen(PORT, HOST, () => {
       console.log(
-        `Backend service is running on http://localhost:${PORT} and HOST=${HOST}`
+        `Backend service is running on http://localhost:${PORT} and HOST=${HOST}...`
       );
     });
   })
