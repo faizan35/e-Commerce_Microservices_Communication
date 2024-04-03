@@ -24,7 +24,7 @@ spec:
             - name: MONGODB_URI
               value: "mongodb://mongodb-service:27017/e-commerce"
             - name: PORT
-              value: "3000"
+              value: "8000"
             - name: HOST
               value: "0.0.0.0"
             - name: MONGO_INITDB_ROOT_USERNAME
