@@ -15,6 +15,9 @@ RUN npm install
 # copy all
 COPY . .
 
+# Build the React app
+RUN npm run build
+
 EXPOSE 3000
 
 CMD ["npm", "start"]
