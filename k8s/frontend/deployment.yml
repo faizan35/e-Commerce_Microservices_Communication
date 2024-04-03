@@ -30,10 +30,10 @@ spec:
           #   limits:
           #     memory: "128Mi"
           #     cpu: "500m"
-          resources:
-            requests:
-              memory: "128Mi"
-              cpu: "500m"
-            limits:
-              memory: "256Mi"
-              cpu: "1000m"
+          # resources:
+          #   requests:
+          #     memory: "128Mi"
+          #     cpu: "500m"
+          #   limits:
+          #     memory: "256Mi"
+          #     cpu: "1000m"
