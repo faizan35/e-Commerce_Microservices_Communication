@@ -66,20 +66,20 @@ Open teminals, execute both command in both of them.
 
 ```bash
 cd frontend/
-docker build -t faizan44/e-com_micro_frontend:latest .
+sudo docker build -t faizan44/e-com_micro_frontend:latest .
 ```
 
 2. Backend
 
 ```bash
 cd backend/
-docker build -t faizan44/e-com_micro_backend:latest .
+sudo docker build -t faizan44/e-com_micro_backend:latest .
 ```
 
 ### Push to DockerHub
 
-- `docker push faizan44/e-com_micro_frontend`
-- `docker push faizan44/e-com_micro_backend`
+- `sudo docker push faizan44/e-com_micro_frontend`
+- `sudo docker push faizan44/e-com_micro_backend`
 
 ### Run with Docker-Compose
 
@@ -106,8 +106,8 @@ docker-compose down
 1. Pull both images.
 
    ```bash
-   docker pull faizan44/e-com_micro_frontend
-   docker pull faizan44/e-com_micro_backend
+   sudo docker pull faizan44/e-com_micro_frontend
+   sudo docker pull faizan44/e-com_micro_backend
    ```
 
 2. Create `docker-compose.yml` file
