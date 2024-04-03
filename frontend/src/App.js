@@ -13,7 +13,7 @@ function App() {
   console.log("From Frontend =", apiUrl);
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
   }, []);
 
   const fetchData = async () => {
