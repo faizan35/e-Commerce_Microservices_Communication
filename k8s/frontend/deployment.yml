@@ -19,10 +19,10 @@ spec:
         - name: frontend
           image: faizan44/e-com_micro_frontend
           ports:
-            - containerPort: 8080
+            - containerPort: 3000
           env:
-            - name: PORT
-              value: "8080"
+            - name: REACT_APP_API_URL
+              value: "http://backend-service:8000"
           resources:
             requests:
               memory: "64Mi"
