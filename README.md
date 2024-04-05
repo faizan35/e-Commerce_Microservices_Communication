@@ -140,6 +140,11 @@ docker-compose up -d
 - For checking DNS Resolutions is correct: `telnet mongodb-service 27017`
 - Check service resolve to IP: `kubectl exec -it -n e-com <POD NAME> -- cat /etc/resolv.conf`
 
+- This Works: `kubectl exec -it frontend-56d9bb9d98-hb2jt -n e-com -- cat /etc/hosts`
+
+Works also: `kubectl exec -it frontend-56d9bb9d98-hb2jt -n e-com -- curl http://backend-service:8000/api/products`
+
+
 ## API Endpoints
 
 - **GET /api/products** Retrieve the list of products.

@@ -11,8 +11,8 @@ spec:
   ingressClassName: alb
   rules:
     # Host to be updated
-    - host: backend.devops
-      http:
+    # - host: backend.devops
+    - http:
         paths:
           - path: /backend-service
             pathType: Prefix
