@@ -1,6 +1,4 @@
 
-# this is without ingress so nodeport is used
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -13,21 +11,4 @@ spec:
     - protocol: TCP
       port: 3000
       targetPort: 3000
-  type: NodePort
 
-
-
-# with ingress
-
-# apiVersion: v1
-# kind: Service
-# metadata: 
-#   name: frontend-service
-#   namespace: e-com
-# spec:
-#   ports:
-#   - port: 3000
-#     protocol: TCP
-#   type: ClusterIP
-#   selector:
-#     role: frontend
