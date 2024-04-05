@@ -8,9 +8,9 @@ function App() {
   const [updateProductId, setUpdateProductId] = useState('');
   const [updateProductName, setUpdateProductName] = useState('');
   const [deleteProductId, setDeleteProductId] = useState('');
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = process.env.REACT_APP_API_URL;  // http://localhost:8000
 
-  console.log("From Frontend =", apiUrl);
+  console.log("From Frontend =", apiUrl);  
 
   useEffect(() => {
     // fetchData();
