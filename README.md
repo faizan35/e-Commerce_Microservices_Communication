@@ -134,10 +134,11 @@ docker-compose up -d
 ## K8s
 
 - namespace: `kubectl create namespace e-com`
-- `kubectl create namespace e-com`
+
 
 
 - For checking DNS Resolutions is correct: `telnet mongodb-service 27017`
+- Check service resolve to IP: `kubectl exec -it -n e-com <POD NAME> -- cat /etc/resolv.conf`
 
 ## API Endpoints
 
