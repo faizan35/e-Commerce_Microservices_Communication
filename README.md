@@ -142,7 +142,10 @@ docker-compose up -d
 
 - This Works: `kubectl exec -it frontend-56d9bb9d98-hb2jt -n e-com -- cat /etc/hosts`
 
-Works also: `kubectl exec -it frontend-56d9bb9d98-hb2jt -n e-com -- curl http://backend-service:8000/api/products`
+Works also: `kubectl exec -it frontend-56d9bb9d98-hb2jt -n e-com -- curl http://api:8000/api/products`
+
+
+kubectl exec -it frontend-5bb8d94c8b-vf7gl -n e-com -- curl http://api:8000/api/products
 
 
 ## API Endpoints

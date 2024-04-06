@@ -14,11 +14,11 @@ spec:
     # - host: backend.devops
     - http:
         paths:
-          - path: /backend-service
+          - path: /api
             pathType: Prefix
             backend:
               service:
-                name: backend-service
+                name: api
                 port:   
                   number: 8000
           - path: /
