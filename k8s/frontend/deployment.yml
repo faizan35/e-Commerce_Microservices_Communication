@@ -26,11 +26,8 @@ spec:
               # With this containers inside the cluster can comunicate
               value: api
 
-              # value: http://api
-
               # value: http://<< ALB >>
-              # value: http://<< ALB >>/api
-              # value: http://<< ALB >>/api:8000
+
           # resources:
           #   requests:
           #     memory: "64Mi"
