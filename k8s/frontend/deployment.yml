@@ -26,6 +26,7 @@ spec:
               # With this containers inside the cluster can comunicate
               value: api
 
+              # Use this to access outside AWS
               # value: http://<< ALB >>
 
           # resources:

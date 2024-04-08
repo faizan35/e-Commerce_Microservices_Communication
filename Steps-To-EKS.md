@@ -1,19 +1,4 @@
-# STEPS
-
-
-```bash
-git clone https://github.com/faizan35/e-Commerce_Microservices_Communication.git
-```
-
-## K8s
-
-- Namespace: `kubectl create namespace e-com`
-
-
-## add policy
-
-- `arn:aws:iam::325954021681:root`: EKS Access
-
+# Steps for setting EKS Cluster
 
 
 ### Step 1: IAM Configuration
@@ -81,9 +66,16 @@ eksctl version
 
 - It will create an EKS cluster named **"e-com-cluster"** in the **us-west-2 region** with a **node group** consisting of EC2 instances of type **t2.medium**. 
 - The node group will have a minimum of 2 instances and a maximum of 2 instances.
+- `eksctl create cluster --help`
 
 ```bash
-eksctl create cluster --name e-com-cluster --region us-west-2 --node-type t2.medium --nodes-min 2 --nodes-max 2
+eksctl create cluster \
+--name e-com-cluster \
+--region us-west-2 \
+--with-oidc \
+--node-type t2.medium \
+--nodes-min 2 \
+--nodes-max 2
 ```
 
 - Create kubeconfig file automatically
@@ -115,7 +107,6 @@ bash all-e-com-manifest.sh
 - **Second Command:** Create an IAM policy using the policy downloaded in the previous step.
 - **Third Command:** Create IAM Role using `eksctl`.
 
-> Replace <YOUR_AWS_ACC_NO> with your actual AWS account number.
 
 ```bash
 curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.7.1/docs/install/iam_policy.json
@@ -125,6 +116,8 @@ aws iam create-policy \
     --policy-document file://iam_policy.json
 ```
 
+> Replace <YOUR_AWS_ACC_NO> with your actual AWS account number.
+
 ```bash
 eksctl create iamserviceaccount \
   --cluster=e-com-cluster \
@@ -132,6 +125,7 @@ eksctl create iamserviceaccount \
   --name=aws-load-balancer-controller \
   --role-name AmazonEKSLoadBalancerControllerRole \
   --attach-policy-arn=arn:aws:iam::<YOUR_AWS_ACC_NO>:policy/AWSLoadBalancerControllerIAMPolicy \
+  --region=us-west-2 \
   --approve
 ``` 
 
@@ -164,7 +158,7 @@ kubectl get deployment -n kube-system aws-load-balancer-controller
 ## Step 11: Apply Ingerss
 
 ``` bash
-kubectl apply -f ingress.yaml
+kubectl apply -f ingress.yml
 ```
 
 ``` bash
