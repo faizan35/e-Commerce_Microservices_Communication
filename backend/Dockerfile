@@ -15,6 +15,6 @@ RUN npm install
 # copy all
 COPY . .
 
-EXPOSE 3000
+EXPOSE 8000
 
 CMD ["node", "backend.js"]
