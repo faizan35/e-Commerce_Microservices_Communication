@@ -26,7 +26,7 @@ git clone https://github.com/faizan35/e-Commerce_Microservices_Communication.git
 
 ### Step 3: Install AWS CLI v2
 
-``` shell
+``` bash
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 sudo apt install unzip
 unzip awscliv2.zip
@@ -36,12 +36,12 @@ sudo ./aws/install -i /usr/local/aws-cli -b /usr/local/bin --update
 
 ##### configure AWS
 
-``` shell
+``` bash
 aws configure
 ```
 
 ### Step 4: Install Docker
-``` shell
+``` bash
 sudo apt-get update
 sudo apt install docker.io
 docker ps
@@ -49,7 +49,7 @@ sudo chown $USER /var/run/docker.sock
 ```
 
 ### Step 5: Install kubectl
-``` shell
+``` bash
 curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin
@@ -57,7 +57,7 @@ kubectl version --short --client
 ```
 
 ### Step 6: Install eksctl
-``` shell
+``` bash
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 sudo mv /tmp/eksctl /usr/local/bin
 eksctl version
@@ -65,11 +65,11 @@ eksctl version
 
 ### Step 7: Setup EKS Cluster
 
-``` shell
+``` bash
 eksctl create cluster --name e-com-cluster --region us-west-2 --node-type t2.medium --nodes-min 2 --nodes-max 2
 ```
 
-``` shell
+``` bash
 aws eks update-kubeconfig --region us-west-2 --name e-com-cluster
 kubectl get nodes
 ```
@@ -81,13 +81,13 @@ git clone https://github.com/faizan35/e-Commerce_Microservices_Communication.git
 cd e-Commerce_Microservices_Communication/k8s
 ```
 
-``` shell
+``` bash
 bash all-e-com-manifest.sh
 ```
 
 ### Step 9: Install AWS Load Balancer
 
-``` shell
+``` bash
 curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
 aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json
 eksctl utils associate-iam-oidc-provider --region=us-west-2 --cluster=e-com-cluster --approve
@@ -98,9 +98,12 @@ eksctl create iamserviceaccount --cluster=e-com-cluster --namespace=kube-system 
 ```
 
 
+
+
+
 ### Step 10: Deploy AWS Load Balancer Controller
 
-``` shell
+``` bash
 sudo snap install helm --classic
 helm repo add eks https://aws.github.io/eks-charts
 helm repo update eks
@@ -110,19 +113,19 @@ kubectl get deployment -n kube-system aws-load-balancer-controller
 
 ## Step 11: Apply Ingerss
 
-``` shell
+``` bash
 kubectl apply -f ingress.yaml
 ```
 
-``` shell
-kubectl get ing -n three-tier
+``` bash
+kubectl get ing -n e-com
 ```
 
 ### Cleanup
 
 - To delete the EKS cluster:
 
-``` shell
+``` bash
 eksctl delete cluster --name e-com-cluster --region us-west-2
 ```
 

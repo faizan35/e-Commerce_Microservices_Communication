@@ -12,7 +12,6 @@
   "bugs": {
     "url": "https://github.com/faizan35/e-Commerce_Microservices_Communication/issues"
   },
-  "homepage": "https://github.com/faizan35/e-Commerce_Microservices_Communication/Readme.md",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
