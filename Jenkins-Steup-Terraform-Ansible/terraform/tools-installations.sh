@@ -1,12 +1,14 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 # Installation of Java
 sudo apt update
 sudo apt install -y fontconfig openjdk-17-jre
 java -version
-openjdk version "17.0.8" 2023-07-18
-OpenJDK Runtime Environment (build 17.0.8+7-Debian-1deb12u1)
-OpenJDK 64-Bit Server VM (build 17.0.8+7-Debian-1deb12u1, mixed mode, sharing)
+# openjdk version "17.0.8" 2023-07-18
+# OpenJDK Runtime Environment (build 17.0.8+7-Debian-1deb12u1)
+# OpenJDK 64-Bit Server VM (build 17.0.8+7-Debian-1deb12u1, mixed mode, sharing)
 
 
 # LTS - Debian/Ubuntu - Jenkins
@@ -18,7 +20,10 @@ echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
 sudo apt-get update
 sudo apt-get install -y jenkins
 
+udo systemctl enable jenkins
+sudo systemctl status jenkins
 
+echo "Jenkins is Installed"
 
 
 
