@@ -74,6 +74,25 @@ module "sg-eks" {
 
 
 # EC2
+module "ec2_eks" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+
+  name = "Jenkins-EKS"
+
+  instance_type          = "t2.micro"
+  ami                    = "ami-08116b9957a259459"
+  key_name               = "eks"
+  monitoring             = true
+  vpc_security_group_ids = [ module.sg-eks.id ]
+  subnet_id              = module.eks-vpc.public_subnets[0]
+
+  associate_public_ip_address = true
+
+  tags = {
+    Terraform   = "true"
+    Environment = "dev"
+  }
+}
 
 
 
