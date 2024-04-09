@@ -8,8 +8,8 @@ module "eks-vpc" {
   azs             = data.aws_availability_zones.azs.names
   public_subnets  = var.vpc_subnet
   map_public_ip_on_launch = true
-  
-  # enable_dns_hostnames = true
+
+  enable_dns_hostnames = true
 
   tags = {
     Name = "Jenkins-EKS-VPC"
@@ -89,6 +89,8 @@ module "ec2_eks" {
 
   associate_public_ip_address = true
   availability_zone = data.aws_availability_zones.azs.names[0]
+
+  user_data = file("tools-installations.sh")
 
   tags = {
     Name        = "EKS-EC2"
