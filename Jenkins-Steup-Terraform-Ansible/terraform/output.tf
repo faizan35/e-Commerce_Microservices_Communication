@@ -4,7 +4,7 @@ output "ec2-pub-ip" {
 
 
 
-output "Public DNS" {
+output "public-dns" {
     value = module.ec2_eks.public_dns
 }
 
