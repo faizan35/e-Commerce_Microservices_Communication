@@ -79,17 +79,18 @@ module "ec2_eks" {
 
   name = "Jenkins-EKS"
 
-  instance_type          = "t2.micro"
-  ami                    = "ami-08116b9957a259459"
-  key_name               = "eks"
+  instance_type          = var.ec2-instance_type
+  ami                    = var.ec2-ami
+  key_name               = var.ec2-key_name
   monitoring             = true
-  vpc_security_group_ids = [ module.sg-eks.id ]
+  vpc_security_group_ids = [ module.sg-eks.security_group_id ]
   subnet_id              = module.eks-vpc.public_subnets[0]
 
   associate_public_ip_address = true
+  availability_zone = data.aws_availability_zones.azs.names[0]
 
   tags = {
-    Terraform   = "true"
+    Name        = "EKS-EC2"
     Environment = "dev"
   }
 }
