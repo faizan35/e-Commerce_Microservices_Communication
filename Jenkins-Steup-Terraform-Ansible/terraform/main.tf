@@ -93,7 +93,7 @@ module "ec2_eks" {
   user_data = file("tools-installations.sh")
 
   tags = {
-    Name        = "EKS-EC2"
+    Name        = "Jenkins-EKS"
     Environment = "dev"
   }
 }
