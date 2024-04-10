@@ -26,8 +26,8 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId:"DockerHub-Cred", passwordVariable:"dockerHubPass", usernameVariable:"dockerHubUser")]){
                 sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
                 // sh "docker tag node-app-test-new:latest ${env.dockerHubUser}/node-app-test-new:latest"
-                sh "docker push faizan44/e-com_micro_frontend:latest"
-                sh "docker push faizan44/e-com_micro_backend:latest"
+                // sh "docker push faizan44/e-com_micro_frontend:latest"
+                // sh "docker push faizan44/e-com_micro_backend:latest"
                 echo 'image push done'
                 }
             }
