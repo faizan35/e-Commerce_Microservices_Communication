@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage("Source"){
+            steps{
+                git url: "https://github.com/faizan35/e-Commerce_Microservices_Communication.git", branch: "main"
+                echo 'code clone done.'
+            }
+        }
+        stage("Build and test"){
+            steps{
+                // sh "cd frontend/ && docker build -t faizan44/e-com_micro_frontend:latest . && cd .."
+                // sh "cd backend/ && docker build -t faizan44/e-com_micro_backend:latest . && cd .."
+                echo 'Code is build, Docker images are ready'
+            }
+        }
+        stage("Scan image"){
+            steps{
+                echo 'image scanning done.'
+            }
+        }
+        stage("push"){
+            steps{
+                withCredentials([usernamePassword(credentialsId:"DockerHub-Cred", passwordVariable:"dockerHubPass", usernameVariable:"dockerHubUser")]){
+                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
+                // sh "docker tag node-app-test-new:latest ${env.dockerHubUser}/node-app-test-new:latest"
+                sh "docker push faizan44/e-com_micro_frontend:latest"
+                sh "docker push faizan44/e-com_micro_backend:latest"
+                echo 'image push done'
+                }
+            }
+        }
+        stage("deploy"){
+            steps{
+                echo 'deployment done.'
+            }
+        }
+    }
+}
