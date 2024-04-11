@@ -117,7 +117,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>Microservices E-commerce</h1>
+        <h1>Microservices E-commerce Jenkins</h1>
       </header>
       <main>
         <div className="container">
