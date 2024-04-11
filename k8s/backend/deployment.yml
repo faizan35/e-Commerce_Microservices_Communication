@@ -25,6 +25,8 @@ spec:
           image: faizan44/e-com_micro_backend
           ports:
             - containerPort: 3000
+          # do not want pull image bcoz will not change anything in backend, for testing.
+          # imagePullPolicy: Always
           env:
             - name: MONGODB_URI
               value: "mongodb://mongodb-service:27017/e-commerce"
