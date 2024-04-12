@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
     stages {
 
         stage("Source"){
@@ -9,9 +12,9 @@ pipeline {
                 echo 'code clone done.'
             }
         }
-        stage("Build and test"){
+        stage("Build and Test"){
             steps{
-                // sh "cd frontend/ && docker build -t faizan44/e-com_micro_frontend:latest . && cd .."
+                sh "cd frontend/ && docker build -t faizan44/e-com_micro_frontend:latest . && cd .."
                 // sh "cd backend/ && docker build -t faizan44/e-com_micro_backend:latest . && cd .."
                 echo 'Code is build, Docker images are ready'
             }
@@ -21,21 +24,84 @@ pipeline {
                 echo 'image scanning done.'
             }
         }
-        stage("push"){
+        stage("Push"){
             steps{
                 withCredentials([usernamePassword(credentialsId:"DockerHub-Cred", passwordVariable:"dockerHubPass", usernameVariable:"dockerHubUser")]){
                 sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
                 // sh "docker tag node-app-test-new:latest ${env.dockerHubUser}/node-app-test-new:latest"
-                // sh "docker push faizan44/e-com_micro_frontend:latest"
+                sh "docker push faizan44/e-com_micro_frontend:latest"
                 // sh "docker push faizan44/e-com_micro_backend:latest"
+                // sh 'aws s3 ls'
                 echo 'image push done'
                 }
             }
         }
-        stage("deploy"){
+        stage("Deploy"){
             steps{
                 echo 'deployment done.'
             }
         }
+
+        stage("Deploy Backend") {
+            steps {
+                script {
+
+                    withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'e-com-cluster', contextName: '', credentialsId: 'SECRET_TOKEN', namespace: 'e-com', serverUrl: 'https://9EA9244864DC7F7D65435366360B8A56.gr7.us-west-2.eks.amazonaws.com']]) {
+                        echo 'Deploying backend service...'
+                        // Apply backend deployment
+
+                        sh "kubectl apply -f k8s/backend/deployment.yml"
+                        // Apply backend service
+                        sh "kubectl apply -f k8s/backend/service.yml"
+                        
+                        // // Check if deployment was successful
+                        // def backendDeploymentStatus = sh(script: "kubectl rollout status deployment/backend-deployment -n e-com", returnStatus: true)
+                        // if (backendDeploymentStatus != 0) {
+                        //     currentBuild.result = 'FAILURE'
+                        //     error("Deployment of backend service failed")
+                        // }
+                    }
+                }
+            }
+        }
+
+        stage("Deploy Frontend") {
+            steps {
+                script {
+                    withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'e-com-cluster', contextName: '', credentialsId: 'SECRET_TOKEN', namespace: 'e-com', serverUrl: 'https://9EA9244864DC7F7D65435366360B8A56.gr7.us-west-2.eks.amazonaws.com']]) {
+
+                        echo 'Deploying frontend service...'
+                        // Apply frontend deployment
+                        sh "kubectl apply -f k8s/frontend/deployment.yml"
+                        // Apply frontend service
+                        sh "kubectl apply -f k8s/frontend/service.yml"
+                        
+                        // // Check if deployment was successful
+                        // def frontendDeploymentStatus = sh(script: "kubectl rollout status deployment/frontend -n e-com", returnStatus: true)
+                        // if (frontendDeploymentStatus != 0) {
+                        //     currentBuild.result = 'FAILURE'
+                        //     error("Deployment of frontend service failed")
+                        // }
+                    }
+                }
+            }
+        }
+
+        stage("Rollback") {
+            steps {
+                script {
+                    withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'e-com-cluster', contextName: '', credentialsId: 'SECRET_TOKEN', namespace: 'e-com', serverUrl: 'https://9EA9244864DC7F7D65435366360B8A56.gr7.us-west-2.eks.amazonaws.com']]) {
+
+                        echo 'Rollback initiated'
+                        // // Rollback logic for backend deployment
+                        // sh "kubectl rollout undo deployment/backend-deployment"
+                        // // Rollback logic for frontend deployment
+                        // sh "kubectl rollout undo deployment/frontend"
+                        // // Add rollback logic for other deployments if needed
+                    }
+                }
+            }
+        }
+
     }
 }
