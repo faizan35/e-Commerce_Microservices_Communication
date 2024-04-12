@@ -100,8 +100,8 @@ aws iam create-policy \
 ```
 
 - **IAM policy Created**
-  <img src="../Resource/IAM-policy-Created.png" width="75%">
-  <img src="../Resource/IAM-policy-Created-AWS.png" width="75%">
+<img src="../Resource/IAM-policy-Created.png" width="75%">
+<img src="../Resource/IAM-policy-Created-AWS.png" width="75%">
 
 
 ##### Create IAM Service Account `eksctl`.
@@ -120,7 +120,7 @@ eksctl create iamserviceaccount \
 ``` 
 
 - **IAM Service Account Created**
-  <img src="../Resource/IAM-Service-Account.png" width="75%">
+<img src="../Resource/IAM-Service-Account.png" width="75%">
 
 #### 6.2 Install AWS Load Balancer Controller
 
@@ -139,10 +139,10 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
 ```
 
 - **Helm & AWS LB Installed**
-  <img src="../Resource/Helm-AWS-LB.png" width="75%">
+<img src="../Resource/Helm-AWS-LB.png" width="75%">
 
 - **Load Balancer Created**
-  <img src="../Resource/Load-Balancer.png" width="75%">
+<img src="../Resource/Load-Balancer.png" width="75%">
 
 
 #### 6.3 Verify that the controller is installed
@@ -154,7 +154,7 @@ kubectl get deployment -n kube-system aws-load-balancer-controller
 ```
 
 - **Verify the controller**
-  <img src="../Resource/Verify-controller.png" width="75%">
+<img src="../Resource/Verify-controller.png" width="75%">
 
 
 ### 7. Apply Ingerss
@@ -170,7 +170,7 @@ kubectl get ing -n e-com
 - Copy the **ADDRESS**.
 
 - **Ingerss Created**
-  <img src="../Resource/Ingerss-Created.png" width="75%">
+<img src="../Resource/Ingerss-Created.png" width="75%">
 
 
 ### 8. Apply k8s Manifests files
@@ -181,11 +181,11 @@ cd e-Commerce_Microservices_Communication/k8s
 ```
 
 - Inside `frontend/` dir in `deployment.yml` manifest file replace the copied Ingress address.
-  <img src="../Resource/replace-alb-address.png" width="75%">
+<img src="../Resource/replace-alb-address.png" width="75%">
 
 
 - Apply all with a script. (intentionally not created Helm Chart.)
-  <img src="../Resource/apply-all.png" width="75%">
+<img src="../Resource/apply-all.png" width="75%">
 
 ```bash
 bash all-e-com-manifest.sh
@@ -194,10 +194,10 @@ bash all-e-com-manifest.sh
 ### 9. Test the application
 
 - Inside your web browser visit the same URL that you pasted in the frontend `deployment.yml` manifest file.
-  <img src="../Resource/alb-endpoint.png">
+<img src="../Resource/alb-endpoint.png">
 
 - You will see.
-  <img src="../Resource/ingress-homepage.png">
+<img src="../Resource/ingress-homepage.png">
 
 ---
 
