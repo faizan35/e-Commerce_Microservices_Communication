@@ -209,4 +209,16 @@ bash all-e-com-manifest.sh
 eksctl delete cluster --name e-com-cluster --region us-west-2
 ```
 
+---
 
+### Trubleshoot
+
+- For checking DNS Resolutions is correct: `telnet mongodb-service 27017`
+- Check service resolve to IP: `kubectl exec -it -n e-com <POD NAME> -- cat /etc/resolv.conf`
+
+- This Works: `kubectl exec -it frontend-56d9bb9d98-hb2jt -n e-com -- cat /etc/hosts`
+
+- Works also: `kubectl exec -it frontend-56d9bb9d98-hb2jt -n e-com -- curl http://api:8000/api/products`
+
+
+---
