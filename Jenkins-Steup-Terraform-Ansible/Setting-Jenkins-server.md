@@ -81,10 +81,10 @@ terraform apply -auto-approve
 ### 7. Access the Jenkins server
 
 - After few min you can access the jenkins server on public IP address with port 8080.
-- You can get the public IP from the terraform output of AWS console.
+- You can get the public IP from the terraform output or AWS console.
 
 ```bash
-<Public_IP>:8080
+http://<Public_IP>:8080
 ```
 
 ##### Congratulations! You have successfully created a Jenkins Server with Terraform without touching the AWS Console.
