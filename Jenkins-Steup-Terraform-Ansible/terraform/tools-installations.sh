@@ -33,9 +33,10 @@ unzip awscliv2.zip
 sudo ./aws/install -i /usr/local/aws-cli -b /usr/local/bin --update
 
 
-### Step 4: Install Docker
+### Install Docker
 
 sudo apt install -y docker.io
+# sudo chown $USER /var/run/docker.sock
 sudo chown jenkins /var/run/docker.sock
 
 
@@ -58,4 +59,5 @@ sudo mv /tmp/eksctl /usr/local/bin
 echo "Jenkins, AWS CLI, Docker, Kubectl, eksctl is Installed..."
 
 
-
+# kube confic add ....
+aws eks update-kubeconfig --region us-west-2 --name e-com-cluster
