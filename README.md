@@ -4,6 +4,12 @@ This project is designed as an example of an e-commerce application using **micr
 
 <img src="./Resource/frontpage.png">
 
+## Setting EKS Cluster on AWS - [here](./EKS-Setup/Steps-To-EKS.md)
+
+## Jenkins Server setup with Terraform - [here](./Jenkins-Steup-Terraform-Ansible/Setting-Jenkins-server.md)
+
+## CI/CD Pipeline for Deployment/Rollback - [here](./cicd-pipeline-jenkins/cicd-pipeline.md)
+
 ## Getting Started for Develpment
 
 **To run the project locally, follow these steps:**
@@ -30,13 +36,18 @@ bash ./scripts/npm_install.sh
 
   ```env
   MONGODB_URI=mongodb://127.0.0.1:27017/e-commerce
-  PORT=3000
+  # MONGODB_USER=admin
+  # MONGODB_PASS=password123
+
+  # USE_DB_AUTH=true
+
+  PORT=8000
   HOST=0.0.0.0
   ```
 
 - Inside `/frontend` dir.
   ```env
-  PORT=8080
+  REACT_APP_API_URL=http://localhost:8000
   ```
 
 ##### 4. Start (frontend, backend and database)
@@ -130,23 +141,6 @@ docker-compose down
 ```bash
 docker-compose up -d
 ```
-
-## K8s
-
-- namespace: `kubectl create namespace e-com`
-
-
-
-- For checking DNS Resolutions is correct: `telnet mongodb-service 27017`
-- Check service resolve to IP: `kubectl exec -it -n e-com <POD NAME> -- cat /etc/resolv.conf`
-
-- This Works: `kubectl exec -it frontend-56d9bb9d98-hb2jt -n e-com -- cat /etc/hosts`
-
-Works also: `kubectl exec -it frontend-56d9bb9d98-hb2jt -n e-com -- curl http://api:8000/api/products`
-
-
-kubectl exec -it frontend-5bb8d94c8b-vf7gl -n e-com -- curl http://api:8000/api/products
-
 
 ## API Endpoints
 
