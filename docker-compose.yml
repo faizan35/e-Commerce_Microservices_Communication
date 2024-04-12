@@ -14,10 +14,10 @@ services:
     build:
       context: ./backend
     ports:
-      - "3000:3000"
+      - "8000:8000"
     environment:
       - MONGODB_URI=mongodb://database:27017/e-commerce
-      - PORT=3000
+      - PORT=8000
       - HOST=0.0.0.0
     depends_on:
       - database
@@ -28,9 +28,9 @@ services:
     build:
       context: ./frontend
     ports:
-      - "8080:8080"
+      - "3000:3000"
     environment:
-      - PORT=8080
+      - PORT=3000
     depends_on:
       - backend
     networks:
