@@ -15,8 +15,8 @@ RUN npm install
 # copy all
 COPY . .
 
-# Build the React app
-RUN npm run build
+# Build the React app, take's a lot of time
+# RUN npm run build
 
 EXPOSE 3000
 
