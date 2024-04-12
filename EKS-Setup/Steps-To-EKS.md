@@ -1,15 +1,13 @@
-# Steps for setting EKS Cluster
+# Steps for setting EKS Cluster on AWS
 
 
-### Step 1: IAM Configuration
-- Create a user `eks-admin` with `AdministratorAccess`.
-- Generate Security Credentials: Access Key and Secret Access Key.
 
-### Step 2: EC2 Setup
-- Launch an Ubuntu instance in your favourite region (eg. region `us-west-2`).
+### 1. EC2 Setup
+
+- Launch an Ubuntu instance.
 - SSH into the instance from your local machine.
 
-### Step 3: Install AWS CLI v2
+### 2. Install AWS CLI v2
 
 ```bash
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -19,22 +17,17 @@ sudo ./aws/install -i /usr/local/aws-cli -b /usr/local/bin --update
 /usr/local/bin/aws --version
 ```
 
-##### configure AWS
+#### Configure AWS
+
+- Create a **IAM User** `eks-Pro` with `AdministratorAccess`.
+- Generate Security Credentials: **Access Key** and **Secret Access Key**.
+- Configure your EC2 with keys created.
 
 ```bash
 aws configure
 ```
 
-### Step 4: Install Docker
-
-```bash
-sudo apt-get update
-sudo apt install docker.io
-docker ps
-sudo chown $USER /var/run/docker.sock
-```
-
-### Step 5: Install kubectl
+### 3. Install kubectl
 
 - [Link](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html) for the commands.
 - Copy the binary to a folder in your `PATH`, use this [Link]().
@@ -47,13 +40,9 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 kubectl version --client
 ```
 
-
-
-### Step 6: Install eksctl
-
+### 4. Install eksctl
 
 - [Link](https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/setting-up-eksctl.html#setting-up-eksctl-linux) for the commands.
-
 
 ```bash
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
@@ -61,12 +50,11 @@ sudo mv /tmp/eksctl /usr/local/bin
 eksctl version
 ```
 
-
-### Step 7: Setup EKS Cluster
+### 5. Setup EKS Cluster
 
 - It will create an EKS cluster named **"e-com-cluster"** in the **us-west-2 region** with a **node group** consisting of EC2 instances of type **t2.medium**. 
 - The node group will have a minimum of 2 instances and a maximum of 2 instances.
-- `eksctl create cluster --help`
+- See all the options [here](../Resource/create-eks-cluster.md): `eksctl create cluster --help`
 
 ```bash
 eksctl create cluster \
@@ -78,35 +66,30 @@ eksctl create cluster \
 --nodes-max 2
 ```
 
-- Create kubeconfig file automatically
+- **Cluster Created.**
+  <img src="../Resource/cluster-created.png" width="75%">
+
+- **Worker Nodes**
+  <img src="../Resource/worker-nodes.png" width="75%">
+
+- Creates **Identity Provider** `--with-oidc`: OIDC allows your K8s cluster to use IAM for authentication to AWS services.
+  <img src="../Resource/Identity-Provider.png" width="75%">
+
+#### Create **kubeconfig** file automatically
 
 ```bash
 aws eks update-kubeconfig --region us-west-2 --name e-com-cluster
 kubectl get nodes
 ```
 
-### Step 8: Apply k8s Manifests files
-
-```bash
-git clone https://github.com/faizan35/e-Commerce_Microservices_Communication.git
-cd e-Commerce_Microservices_Communication/k8s
-```
-
-```bash
-bash all-e-com-manifest.sh
-```
-
-
-### Step 9: Install the AWS Load Balancer Controller using Helm
+### 6. Install the AWS Load Balancer Controller using Helm
 
 - [Link](https://docs.aws.amazon.com/eks/latest/userguide/lbc-helm.html) for documentaions.
 
-#### 9.1 Create IAM Role using `eksctl`
+#### 6.1 Create IAM Role using `eksctl`
 
 - **First Command:** Download's the file `iam_policy.json`. 
 - **Second Command:** Create an IAM policy using the policy downloaded in the previous step.
-- **Third Command:** Create IAM Role using `eksctl`.
-
 
 ```bash
 curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.7.1/docs/install/iam_policy.json
@@ -115,6 +98,13 @@ aws iam create-policy \
     --policy-name AWSLoadBalancerControllerIAMPolicy \
     --policy-document file://iam_policy.json
 ```
+
+- **IAM policy Created**
+  <img src="../Resource/IAM-policy-Created.png" width="75%">
+  <img src="../Resource/IAM-policy-Created-AWS.png" width="75%">
+
+
+##### Create IAM Service Account `eksctl`.
 
 > Replace <YOUR_AWS_ACC_NO> with your actual AWS account number.
 
@@ -129,11 +119,12 @@ eksctl create iamserviceaccount \
   --approve
 ``` 
 
+- **IAM Service Account Created**
+  <img src="../Resource/IAM-Service-Account.png" width="75%">
 
-#### 9.2 Install AWS Load Balancer Controller
+#### 6.2 Install AWS Load Balancer Controller
 
 - Here we will install `aws-load-balancer-controller`, which is Pod that will create Application Load Balancer by reading the `ingress.yml` manifest, or we can say it will apply all the rules mentioned in `ingress.yml` to the ALB.
-
 
 ``` bash
 sudo snap install helm --classic
@@ -147,7 +138,14 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   --set serviceAccount.name=aws-load-balancer-controller 
 ```
 
-#### 9.3 Verify that the controller is installed
+- **Helm & AWS LB Installed**
+  <img src="../Resource/Helm-AWS-LB.png" width="75%">
+
+- **Load Balancer Created**
+  <img src="../Resource/Load-Balancer.png" width="75%">
+
+
+#### 6.3 Verify that the controller is installed
 
 - Verify that the controller is installed.
 
@@ -155,7 +153,11 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
 kubectl get deployment -n kube-system aws-load-balancer-controller
 ```
 
-## Step 11: Apply Ingerss
+- **Verify the controller**
+  <img src="../Resource/Verify-controller.png" width="75%">
+
+
+### 7. Apply Ingerss
 
 ``` bash
 kubectl apply -f ingress.yml
@@ -165,25 +167,46 @@ kubectl apply -f ingress.yml
 kubectl get ing -n e-com
 ```
 
+- Copy the **ADDRESS**.
+
+- **Ingerss Created**
+  <img src="../Resource/Ingerss-Created.png" width="75%">
+
+
+### 8. Apply k8s Manifests files
+
+```bash
+git clone https://github.com/faizan35/e-Commerce_Microservices_Communication.git
+cd e-Commerce_Microservices_Communication/k8s
+```
+
+- Inside `frontend/` dir in `deployment.yml` manifest file replace the copied Ingress address.
+  <img src="../Resource/replace-alb-address.png" width="75%">
+
+
+- Apply all with a script. (intentionally not created Helm Chart.)
+  <img src="../Resource/apply-all.png" width="75%">
+
+```bash
+bash all-e-com-manifest.sh
+```
+
+### 9. Test the application
+
+- Inside your web browser visit the same URL that you pasted in the frontend `deployment.yml` manifest file.
+  <img src="../Resource/alb-endpoint.png">
+
+- You will see.
+  <img src="../Resource/ingress-homepage.png">
+
+---
+
 ### Cleanup
 
-- To delete the EKS cluster:
+- To delete the EKS cluster.
 
 ``` bash
 eksctl delete cluster --name e-com-cluster --region us-west-2
 ```
 
-## Contribution Guidelines
-- Fork the repository and create your feature branch.
-- Deploy the application, adding your creative enhancements.
-- Ensure your code adheres to the project's style and contribution guidelines.
-- Submit a Pull Request with a detailed description of your changes.
 
-## Rewards
-- Successful PR merges will be eligible for exciting prizes!
-
-## Support
-For any queries or issues, please open an issue in the repository.
-
----
-Happy Learning! 🚀👨‍💻👩‍💻
