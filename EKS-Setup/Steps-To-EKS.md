@@ -67,13 +67,13 @@ eksctl create cluster \
 ```
 
 - **Cluster Created.**
-  <img src="../Resource/cluster-created.png" width="75%">
+<img src="../Resource/cluster-created.png" width="75%">
 
 - **Worker Nodes**
-  <img src="../Resource/worker-nodes.png" width="75%">
+<img src="../Resource/worker-nodes.png" width="75%">
 
 - Creates **Identity Provider** `--with-oidc`: OIDC allows your K8s cluster to use IAM for authentication to AWS services.
-  <img src="../Resource/Identity-Provider.png" width="75%">
+<img src="../Resource/Identity-Provider.png" width="75%">
 
 #### Create **kubeconfig** file automatically
 
