@@ -88,3 +88,5 @@ http://<Public_IP>:8080
 ```
 
 ##### Congratulations! You have successfully created a Jenkins Server with Terraform without touching the AWS Console.
+
+<img src="jenkins-server.png">
