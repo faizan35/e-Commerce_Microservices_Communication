@@ -6,9 +6,17 @@ This project is designed as an example of an e-commerce application using **micr
 
 ## Setting EKS Cluster on AWS - [here](./EKS-Setup/Steps-To-EKS.md)
 
+###### Video Comming Soon...
+
 ## Jenkins Server setup with Terraform - [here](./Jenkins-Steup-Terraform-Ansible/Setting-Jenkins-server.md)
 
+###### Video Comming Soon...
+
 ## CI/CD Pipeline for Deployment/Rollback - [here](./cicd-pipeline-jenkins/cicd-pipeline.md)
+
+###### Video Comming Soon...
+
+---
 
 ## Getting Started for Develpment
 
@@ -58,7 +66,8 @@ Open teminals, execute both command in both of them.
 2. Execute frontend first.
 
    ```bash
-   node frontend/server.js
+   cd frontend
+   npm start
    ```
 
 3. Execute backend then.
@@ -67,7 +76,7 @@ Open teminals, execute both command in both of them.
    node backend/backend.js
    ```
 
-##### 5. Access the frontend in your browser at http://localhost:8080.
+##### 5. Access the frontend in your browser at http://localhost:3000.
 
 ## Docker
 
