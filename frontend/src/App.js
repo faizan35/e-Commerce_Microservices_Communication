@@ -18,7 +18,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`${apiUrl}/api/products`);
+      const response = await fetch(`${apiUrl}/products`);
       if (!response.ok) {
         throw new Error(
           `Failed to fetch products: ${response.status} ${response.statusText}`
@@ -33,7 +33,7 @@ function App() {
 
   const addProduct = async () => {
     try {
-      const response = await fetch(`${apiUrl}/api/products`, {
+      const response = await fetch(`${apiUrl}/products`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ function App() {
 
   const updateProduct = async () => {
     try {
-      const response = await fetch(`${apiUrl}/api/products/${updateProductId}`, {
+      const response = await fetch(`${apiUrl}/products/${updateProductId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ function App() {
 
   const deleteProduct = async () => {
     try {
-      const response = await fetch(`${apiUrl}/api/products/${deleteProductId}`, {
+      const response = await fetch(`${apiUrl}/products/${deleteProductId}`, {
         method: 'DELETE',
       });
       if (!response.ok) {

@@ -55,7 +55,7 @@ bash ./scripts/npm_install.sh
 
 - Inside `/frontend` dir.
   ```env
-  REACT_APP_API_URL=http://localhost:8000
+  REACT_APP_API_URL=http://localhost:8000/api
   ```
 
 ##### 4. Start (frontend, backend and database)
@@ -106,7 +106,7 @@ sudo docker build -t faizan44/e-com_micro_backend:latest .
 1. Install Docker-Compose
 
 ```bash
-sudo apt  install docker-compose
+sudo apt install docker-compose
 ```
 
 2. Run
